@@ -1,0 +1,50 @@
+{
+    "availableLocales": ["en", "en-GB", "en-AU", "de", "hu", "sr", "sr-Latn", "hr", "ja"],
+    "messages": "messages/[locale]/main.json",
+    "dateFormatters": [
+        null,
+        { "skeleton": "GyMMMd" },
+        { "date": "medium" },
+        { "time": "medium" },
+        { "datetime": "medium" }
+    ],
+    "dateParsers": [
+        null,
+        { "skeleton": "GyMMMd" },
+        { "date": "medium" },
+        { "time": "medium" },
+        { "datetime": "medium" }
+    ],
+    "numberFormatters": [
+        null,
+        { "maximumFractionDigits": 5 },
+        { "round": "floor" },
+        { "minimumFractionDigits": 2 },
+        { "style": "percent" }
+    ],
+    "numberParsers": [
+        null,
+        { "style": "percent" }
+    ],
+    "currencyFormatters": [
+        "USD",
+        ["USD", { "style": "accounting" }],
+        ["USD", { "style": "name" }],
+        ["USD", { "style": "code" }],
+        ["USD", { "round": "ceil" }]
+    ],
+    "pluralGenerators": [
+        null,
+        { "type": "ordinal" }
+    ],
+    "relativeTimeFormatters": [
+        "day",
+        ["month"],
+        ["month", { "form": "short" }]
+    ],
+    "unitFormatters": [
+        "second",
+        ["second", { "form": "short" }],
+        ["second", { "form": "narrow" }]
+    ]
+}

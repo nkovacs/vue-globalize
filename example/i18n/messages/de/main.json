@@ -1,0 +1,12 @@
+{
+    "test": "This is a test in locale en",
+    "likeIncludingMe": [
+        "{0, plural, offset:1",
+        "     =0 {Be the first to like this}",
+        "     =1 {You liked this}",
+        "    one {You and someone else liked this}",
+        "  other {You and # others liked this}",
+        "}"
+    ],
+    "message-1": "An example of a message using mixed numbers \"{number}\", currencies \"{currency}\", dates \"{date}\", and relative time \"{relativeTime}\"."
+}

@@ -1,0 +1,4 @@
+{
+    "availableLocales": ["en", "en-GB", "en-AU", "de", "hu", "sr", "sr-Latn", "hr", "ja"],
+    "messages": "messages/[locale]/additional.json"
+}
