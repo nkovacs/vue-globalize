@@ -6,6 +6,7 @@ Globalization plugin for Vue.js.
 
  - Vue.js 1.0
  - Globalize 1.1
+ - Promise (add your own polyfill if needed)
  
 ## Usage
 
