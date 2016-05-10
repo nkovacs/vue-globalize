@@ -118,7 +118,8 @@ function augment(Vue) {
                             this.$set('globalize', globalize);
 
                             let newCategoriesLoaded = {};
-                            for (let category of this.categoriesInUse) {
+                            for (let i = 0, l = this.categoriesInUse.length; i < l; i++) {
+                                let category = this.categoriesInUse[i];
                                 newCategoriesLoaded[category] = true;
                             }
                             vm.categoriesLoaded = newCategoriesLoaded;
@@ -299,7 +300,8 @@ let install = function(externalVue, options) {
 
     let fail = false;
     let fns = ['loadGlobalize'];
-    for (let fn of fns) {
+    for (let i = 0, l = fns.length; i < l; i++) {
+        let fn = fns[i];
         if (typeof options[fn] !== 'function') {
             warn('missing "' + fn + '" function');
             fail = true;
