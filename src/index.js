@@ -115,7 +115,7 @@ function augment(Vue) {
                         Promise.all([
                             createGlobalize(locale, this.categoriesInUse)
                         ]).then(([globalize]) => {
-                            this.$set('globalize', globalize);
+                            Vue.set(this, 'globalize', globalize);
 
                             let newCategoriesLoaded = {};
                             for (let i = 0, l = this.categoriesInUse.length; i < l; i++) {
@@ -260,8 +260,8 @@ function augment(Vue) {
             if (currentLoaderPromise) {
                 currentLoaderPromise.then(({globalize, locale}) => {
                     loadAdditionalCategories(globalize, locale, [category]).then((globalize) => {
-                        vm.$set('globalize', globalize);
-                        vm.$set('categoriesLoaded.' + category, true);
+                        Vue.set(vm, 'globalize', globalize);
+                        Vue.set(vm, 'categoriesLoaded.' + category, true);
                     }, function(err) {
                         warn(err);
                     });

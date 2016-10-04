@@ -196,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                            var globalize = _ref2[0];
 
-	                            _this.$set('globalize', globalize);
+	                            Vue.set(_this, 'globalize', globalize);
 
 	                            var newCategoriesLoaded = {};
 	                            for (var i = 0, l = _this.categoriesInUse.length; i < l; i++) {
@@ -344,8 +344,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var locale = _ref3.locale;
 
 	                    loadAdditionalCategories(globalize, locale, [category]).then(function (globalize) {
-	                        vm.$set('globalize', globalize);
-	                        vm.$set('categoriesLoaded.' + category, true);
+	                        Vue.set(vm, 'globalize', globalize);
+	                        Vue.set(vm, 'categoriesLoaded.' + category, true);
 	                    }, function (err) {
 	                        (0, _util.warn)(err);
 	                    });
