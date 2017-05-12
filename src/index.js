@@ -115,7 +115,7 @@ function augment(Vue) {
                         Promise.all([
                             createGlobalize(locale, this.categoriesInUse)
                         ]).then(([globalize]) => {
-                            Vue.set(this, 'globalize', globalize);
+                            this.globalize = globalize;
 
                             let newCategoriesLoaded = {};
                             for (let i = 0, l = this.categoriesInUse.length; i < l; i++) {
@@ -138,43 +138,43 @@ function augment(Vue) {
         }
     });
 
-    Vue.filter('date', function(value, format) {
+    const dateFilter = function(value, format) {
         try {
             return vm.dateFormatter('date', format || 'medium')(new Date(value));
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('time', function(value, format) {
+    const timeFilter = function(value, format) {
         try {
             return vm.dateFormatter('time', format || 'medium')(new Date(value));
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('datetime', function(value, format) {
+    const datetimeFilter = function(value, format) {
         try {
             return vm.dateFormatter('datetime', format || 'medium')(new Date(value));
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('number', function(value, options) {
+    const numberFilter = function(value, options) {
         try {
             return vm.numberFormatter(options || {})(value);
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('percent', function(value, options) {
+    const percentFilter = function(value, options) {
         try {
             options = options || {};
             options.style = options.style || 'percent';
@@ -183,43 +183,53 @@ function augment(Vue) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('currency', function(value, currency, options) {
+    const currencyFilter = function(value, currency, options) {
         try {
             return vm.currencyFormatter(currency, options || {})(value);
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('plural', function(value, type) {
+    const pluralFilter = function(value, type) {
         try {
             return vm.pluralGenerator({type: type || 'cardinal'})(value);
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('relativeTime', function(value, unit, options) {
+    const relativeTimeFilter = function(value, unit, options) {
         try {
             return vm.relativeTimeFormatter(unit, options || {})(value);
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
 
-    Vue.filter('unit', function(value, unit, options) {
+    const unitFilter = function(value, unit, options) {
         try {
             return vm.unitFormatter(unit, options || {})(value);
         } catch (e) {
             warn(e);
             return value;
         }
-    });
+    };
+
+    Vue.filter('date', dateFilter);
+    Vue.filter('time', timeFilter);
+    Vue.filter('datetime', datetimeFilter);
+    Vue.filter('number', numberFilter);
+    Vue.filter('percent', percentFilter);
+    Vue.filter('currency', currencyFilter);
+    Vue.filter('plural', pluralFilter);
+    Vue.filter('relativeTime', relativeTimeFilter);
+    Vue.filter('unit', unitFilter);
 
     Vue.prototype.t = function(string, variables) {
         if (!vm.globalize) {
@@ -231,6 +241,20 @@ function augment(Vue) {
             warn(e);
             return string;
         }
+    };
+
+    // Also add filters to prototype, so that they can be used
+    // outside of text bindings.
+    Vue.prototype.format = {
+        date: dateFilter,
+        time: timeFilter,
+        datetime: datetimeFilter,
+        number: numberFilter,
+        percent: percentFilter,
+        currency: currencyFilter,
+        plural: pluralFilter,
+        relativeTime: relativeTimeFilter,
+        unit: unitFilter
     };
 
     Vue.prototype.$setLocale = function(locale) {
@@ -260,8 +284,8 @@ function augment(Vue) {
             if (currentLoaderPromise) {
                 currentLoaderPromise.then(({globalize, locale}) => {
                     loadAdditionalCategories(globalize, locale, [category]).then((globalize) => {
-                        Vue.set(vm, 'globalize', globalize);
-                        Vue.set(vm, 'categoriesLoaded.' + category, true);
+                        vm.globalize = globalize;
+                        Vue.set(vm.categoriesLoaded, category, true);
                     }, function(err) {
                         warn(err);
                     });
@@ -276,7 +300,10 @@ function augment(Vue) {
      * the category will not be automatically loaded on a locale switch.
      */
     Vue.prototype.$removeGlobalizeCategory = function(category) {
-        vm.categoriesInUse.$remove(category);
+        var index = vm.categoriesInUse.indexOf(category);
+        if (index !== -1) {
+            vm.categoriesInUse.splice(index, 1);
+        }
     };
 }
 

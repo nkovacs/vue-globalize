@@ -24,14 +24,14 @@
                 <p v-text="t('likeIncludingMe', 3)">not loaded</p>
 
                 <p>{{ t('message-1', {
-                    currency: $eval('69900 | currency "USD"'),
-                    date: $eval('new Date() | date'),
-                    number: $eval('12345.6 | number'),
-                    relativeTime: $eval('-2 | relativeTime "month"'),
+                    currency: this.format.currency(69900, 'USD'),
+                    date: this.format.date(new Date()),
+                    number: this.format.number(12345.6),
+                    relativeTime: this.format.relativeTime(-2, 'month'),
                 }) }}</p>
 
                 <p>{{ 0.65 | percent }}</p>
-                <p>{{ 65 | unit 'second' }}</p>
+                <p>{{ 65 | unit('second') }}</p>
 
                 <button v-on:click="show">Click me</button>
                 <div v-if="shown && $globalizeCategoryLoaded('additional')">{{ t('additional') }}</div>

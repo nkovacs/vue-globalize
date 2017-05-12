@@ -7,7 +7,7 @@ Vue.use(VueGlobalize, {
     defaultCategories: ['main'],
     loadGlobalize: function(locale, categories, globalize, callback) {
         let promises = [];
-        let rcontext = require.context('globalize-config!./i18n', false, /.*\.json$/);
+        let rcontext = require.context('globalize-config-loader!./i18n', false, /.*\.json$/);
         for (let category of categories) {
             promises.push(new Promise(function(resolve, reject) {
                 rcontext('./' + category + '.json')(locale, function(initFn) {
