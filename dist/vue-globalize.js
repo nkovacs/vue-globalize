@@ -48,9 +48,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -78,7 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,45 +88,10 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.warn = warn;
-/*** IMPORTS FROM imports-loader ***/
-var define = false;
-
-// export default for holding the Vue reference
-var _exports = {};
-exports.default = _exports;
-
-/**
- * Warn stuff.
- *
- * @param {String} msg
- */
-
-function warn(msg) {
-    /* istanbul ignore next */
-    if (window.console) {
-        console.warn('[vue-globalize] ' + msg);
-        /* istanbul ignore if */
-        if (!_exports.Vue || _exports.Vue.config.debug) {
-            console.warn(new Error('warning stack trace:').stack);
-        }
-    }
-}
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _util = __webpack_require__(0);
+var _util = __webpack_require__(1);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -495,6 +457,41 @@ var install = function install(externalVue, options) {
 };
 
 exports.default = install;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.warn = warn;
+/*** IMPORTS FROM imports-loader ***/
+var define = false;
+
+// export default for holding the Vue reference
+var _exports = {};
+exports.default = _exports;
+
+/**
+ * Warn stuff.
+ *
+ * @param {String} msg
+ */
+
+function warn(msg) {
+    /* istanbul ignore next */
+    if (window.console) {
+        console.warn('[vue-globalize] ' + msg);
+        /* istanbul ignore if */
+        if (!_exports.Vue || _exports.Vue.config.debug) {
+            console.warn(new Error('warning stack trace:').stack);
+        }
+    }
+}
 
 /***/ })
 /******/ ]);
