@@ -47,24 +47,24 @@ describe('Vue.filters', function() {
         return vm.$setLocale('en').then(function() {
             expect(vm.format.date(new Date(2010, 8, 15, 17, 35, 7, 369)))
                 .to.equal('Sep 15, 2010');
-            expect(vm.format.date(new Date(2010, 8, 15, 17, 35, 7, 369), 'long'))
-                .to.equal('September 15, 2010');
+            expect(vm.format.date(new Date(2010, 8, 15, 17, 35, 7, 369), 'short'))
+                .to.equal('9/15/10');
         });
     });
     it('should format time', function() {
         return vm.$setLocale('en').then(function() {
             expect(vm.format.time(new Date(2010, 8, 15, 17, 35, 7, 369)))
                 .to.equal('5:35:07 PM');
-            expect(vm.format.time(new Date(2010, 8, 15, 17, 35, 7, 369), 'long'))
-                .to.equal('5:35:07 PM GMT+2');
+            expect(vm.format.time(new Date(2010, 8, 15, 17, 35, 7, 369), 'short'))
+                .to.equal('5:35 PM');
         });
     });
     it('should format datetime', function() {
         return vm.$setLocale('en').then(function() {
             expect(vm.format.datetime(new Date(2010, 8, 15, 17, 35, 7, 369)))
                 .to.equal('Sep 15, 2010, 5:35:07 PM');
-            expect(vm.format.datetime(new Date(2010, 8, 15, 17, 35, 7, 369), 'long'))
-                .to.equal('September 15, 2010 at 5:35:07 PM GMT+2');
+            expect(vm.format.datetime(new Date(2010, 8, 15, 17, 35, 7, 369), 'short'))
+                .to.equal('9/15/10, 5:35 PM');
         });
     });
     it('should format number', function() {
