@@ -106,10 +106,9 @@ function augment(Vue) {
                     return noop;
                 }
                 return this.globalize.unitFormatter(unit, options);
-            }
-        },
-        watch: {
-            locale: function(locale, oldLocale) {
+            },
+            setLocale(locale) {
+                vm.locale = locale;
                 if (locale !== null) {
                     currentLoaderPromise = new Promise((resolve, reject) => {
                         Promise.all([
@@ -133,7 +132,10 @@ function augment(Vue) {
                             reject(err);
                         });
                     });
+                    return currentLoaderPromise;
                 }
+                this.globalize = null;
+                return Promise.resolve(null);
             }
         }
     });
@@ -258,7 +260,7 @@ function augment(Vue) {
     };
 
     Vue.prototype.$setLocale = function(locale) {
-        vm.locale = locale;
+        return vm.setLocale(locale);
     };
 
     Vue.prototype.$getLocale = function() {
@@ -282,7 +284,7 @@ function augment(Vue) {
         if (index === -1) {
             vm.categoriesInUse.push(category);
             if (currentLoaderPromise) {
-                currentLoaderPromise.then(({globalize, locale}) => {
+                currentLoaderPromise = currentLoaderPromise.then(({globalize, locale}) => {
                     loadAdditionalCategories(globalize, locale, [category]).then((globalize) => {
                         vm.globalize = globalize;
                         Vue.set(vm.categoriesLoaded, category, true);
@@ -290,8 +292,10 @@ function augment(Vue) {
                         warn(err);
                     });
                 });
+                return currentLoaderPromise;
             }
         }
+        return Promise.resolve(true);
     };
 
     /**
