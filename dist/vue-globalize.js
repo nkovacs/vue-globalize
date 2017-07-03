@@ -84,13 +84,35 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/util.js
+// export default for holding the Vue reference
+var exports = {};
+/* harmony default export */ var util_defaultExport = (exports);
+
+/**
+ * Warn stuff.
+ *
+ * @param {String} msg
+ */
+
+function warn(msg) {
+    /* istanbul ignore next */
+    if (window.console) {
+        console.warn('[vue-globalize] ' + msg);
+        /* istanbul ignore if */
+        if (!exports.Vue || exports.Vue.config.debug) {
+            console.warn(new Error('warning stack trace:').stack);
+        }
+    }
+}
+// CONCATENATED MODULE: ./src/index.js
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 
 // import Globalize from 'globalize';
 
-var Vue = void 0;
+var src_Vue = void 0;
 var installed = false;
 var globalizeLoader = void 0;
 var defaultCategories = [];
@@ -220,7 +242,7 @@ function augment(Vue) {
                                 locale: locale
                             });
                         }, function (err) {
-                            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](err);
+                            warn(err);
                             reject(err);
                         });
                     });
@@ -236,7 +258,7 @@ function augment(Vue) {
         try {
             return vm.dateFormatter('date', format || 'medium')(new Date(value));
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -245,7 +267,7 @@ function augment(Vue) {
         try {
             return vm.dateFormatter('time', format || 'medium')(new Date(value));
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -254,7 +276,7 @@ function augment(Vue) {
         try {
             return vm.dateFormatter('datetime', format || 'medium')(new Date(value));
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -263,7 +285,7 @@ function augment(Vue) {
         try {
             return vm.numberFormatter(options || {})(value);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -274,7 +296,7 @@ function augment(Vue) {
             options.style = options.style || 'percent';
             return vm.numberFormatter(options)(value);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -283,7 +305,7 @@ function augment(Vue) {
         try {
             return vm.currencyFormatter(currency, options || {})(value);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -292,7 +314,7 @@ function augment(Vue) {
         try {
             return vm.pluralGenerator({ type: type || 'cardinal' })(value);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -301,7 +323,7 @@ function augment(Vue) {
         try {
             return vm.relativeTimeFormatter(unit, options || {})(value);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -310,7 +332,7 @@ function augment(Vue) {
         try {
             return vm.unitFormatter(unit, options || {})(value);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return value;
         }
     };
@@ -332,7 +354,7 @@ function augment(Vue) {
         try {
             return vm.globalize.formatMessage(string, variables);
         } catch (e) {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](e);
+            warn(e);
             return string;
         }
     };
@@ -384,7 +406,7 @@ function augment(Vue) {
                         vm.globalize = globalize;
                         Vue.set(vm.categoriesLoaded, category, true);
                     }, function (err) {
-                        __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */](err);
+                        warn(err);
                     });
                 });
                 return currentLoaderPromise;
@@ -417,9 +439,9 @@ function augment(Vue) {
  *      the existing instance, and callback should be called with the same instance.
  *      Otherwise callback should be called with the new instance.
  */
-var install = function install(externalVue, options) {
+var src_install = function install(externalVue, options) {
     if (installed) {
-        __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */]('already installed');
+        warn('already installed');
         return;
     }
     options = options || {};
@@ -429,7 +451,7 @@ var install = function install(externalVue, options) {
     for (var i = 0, l = fns.length; i < l; i++) {
         var fn = fns[i];
         if (typeof options[fn] !== 'function') {
-            __WEBPACK_IMPORTED_MODULE_0__util__["b" /* warn */]('missing "' + fn + '" function');
+            warn('missing "' + fn + '" function');
             fail = true;
         }
     }
@@ -442,40 +464,13 @@ var install = function install(externalVue, options) {
         defaultCategories = options.defaultCategories;
     }
 
-    Vue = externalVue;
-    __WEBPACK_IMPORTED_MODULE_0__util__["a" /* default */].Vue = Vue;
+    src_Vue = externalVue;
+    util_defaultExport.Vue = src_Vue;
     installed = true;
-    augment(Vue);
+    augment(src_Vue);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (install);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = warn;
-// export default for holding the Vue reference
-var exports = {};
-/* harmony default export */ __webpack_exports__["a"] = (exports);
-
-/**
- * Warn stuff.
- *
- * @param {String} msg
- */
-
-function warn(msg) {
-    /* istanbul ignore next */
-    if (window.console) {
-        console.warn('[vue-globalize] ' + msg);
-        /* istanbul ignore if */
-        if (!exports.Vue || exports.Vue.config.debug) {
-            console.warn(new Error('warning stack trace:').stack);
-        }
-    }
-}
+/* harmony default export */ __webpack_exports__["default"] = (src_install);
 
 /***/ })
 /******/ ]);
