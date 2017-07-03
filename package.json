@@ -4,7 +4,7 @@
   "description": "Globalize plugin for Vue",
   "main": "dist/vue-globalize.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "yarpm run unit",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "build": "webpack --progress",
     "watch": "webpack --progress --watch",
@@ -43,7 +43,8 @@
     "sinon": "^2.3.6",
     "sinon-chai": "^2.11.0",
     "vue": "^2.3.4",
-    "webpack": "^3.0.0"
+    "webpack": "^3.0.0",
+    "yarpm": "^0.2.1"
   },
   "dependencies": {}
 }
