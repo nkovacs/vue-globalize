@@ -1,4 +1,4 @@
-# vue-globalize
+# vue-globalize [![Build Status](https://travis-ci.org/nkovacs/vue-globalize.svg?branch=master)](https://travis-ci.org/nkovacs/vue-globalize)
 
 Globalization plugin for Vue.js.
 
