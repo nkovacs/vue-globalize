@@ -1,6 +1,6 @@
 {
   "name": "vue-globalize",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Globalize plugin for Vue",
   "main": "dist/vue-globalize.js",
   "scripts": {
