@@ -96,7 +96,7 @@ The following methods are added to `Vue.prototype`, so they are available to all
 
     Formats a datetime value.
     `format` defaults to `'medium'`.
-    Wrapper for `Globalize.formatDate({time: format})`.
+    Wrapper for `Globalize.formatDate({datetime: format})`.
 
 - number: `(value, options)`
 
