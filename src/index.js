@@ -14,7 +14,9 @@ function wrapGlobalize(globalize) {
         dateFormatterCache: {
             date: {},
             datetime: {},
-            time: {}
+            time: {},
+            raw: {},
+            skeleton: {}
         }
     });
 }
@@ -167,6 +169,24 @@ function augment(Vue) {
         }
     };
 
+    const daterawFilter = function(value, format) {
+        try {
+            return vm.dateFormatter('raw', format)(new Date(value));
+        } catch (e) {
+            warn(e);
+            return value;
+        }
+    };
+
+    const dateskeletonFilter = function(value, format) {
+        try {
+            return vm.dateFormatter('skeleton', format)(new Date(value));
+        } catch (e) {
+            warn(e);
+            return value;
+        }
+    };
+
     const numberFilter = function(value, options) {
         try {
             return vm.numberFormatter(options || {})(value);
@@ -226,6 +246,8 @@ function augment(Vue) {
     Vue.filter('date', dateFilter);
     Vue.filter('time', timeFilter);
     Vue.filter('datetime', datetimeFilter);
+    Vue.filter('dateraw', daterawFilter);
+    Vue.filter('dateskeleton', dateskeletonFilter);
     Vue.filter('number', numberFilter);
     Vue.filter('percent', percentFilter);
     Vue.filter('currency', currencyFilter);
@@ -251,6 +273,8 @@ function augment(Vue) {
         date: dateFilter,
         time: timeFilter,
         datetime: datetimeFilter,
+        dateraw: daterawFilter,
+        dateskeleton: dateskeletonFilter,
         number: numberFilter,
         percent: percentFilter,
         currency: currencyFilter,

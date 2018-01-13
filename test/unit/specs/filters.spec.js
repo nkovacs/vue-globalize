@@ -67,6 +67,18 @@ describe('Vue.filters', function() {
                 .to.equal('9/15/10, 5:35 PM');
         });
     });
+    it('should format dateraw', function() {
+        return vm.$setLocale('en').then(function() {
+            expect(vm.format.dateraw(new Date(2010, 8, 15, 17, 35, 7, 369), 'GyMMMd'))
+                .to.equal('AD2010Sep15');
+        });
+    });
+    it('should format dateskeleton', function() {
+        return vm.$setLocale('en').then(function() {
+            expect(vm.format.dateskeleton(new Date(2010, 8, 15, 17, 35, 7, 369), 'GyMMMd'))
+                .to.equal('Sep 15, 2010 AD');
+        });
+    });
     it('should format number', function() {
         return vm.$setLocale('en').then(function() {
             expect(vm.format.number(12345.6666))

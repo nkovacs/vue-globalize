@@ -32,6 +32,12 @@
 
                 <p>{{ 0.65 | percent }}</p>
                 <p>{{ 65 | unit('second') }}</p>
+                <p>{{ this.format.dateskeleton(new Date(), "E") }}</p>
+                <p>{{ this.format.dateraw(new Date(), "E") }}</p>
+                <p>{{ this.format.dateskeleton(new Date(), "EEEE") }}</p>
+                <p>{{ this.format.dateraw(new Date(), "EEEE") }}</p>
+                <p>{{ this.format.dateskeleton(new Date(), "GyMMMd") }}</p>
+                <p>{{ this.format.dateraw(new Date(), "GyMMMd") }}</p>
 
                 <button v-on:click="show">Click me</button>
                 <div v-if="shown && $globalizeCategoryLoaded('additional')">{{ t('additional') }}</div>

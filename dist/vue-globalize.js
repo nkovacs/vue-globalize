@@ -1,6 +1,6 @@
 /*!
- * vue-globalize v0.2.0
- * (c) 2017 Nikola Kovacs
+ * vue-globalize v0.2.2
+ * (c) 2018 Nikola Kovacs
  * Released under the MIT License.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -125,7 +125,9 @@ function wrapGlobalize(globalize) {
         dateFormatterCache: {
             date: {},
             datetime: {},
-            time: {}
+            time: {},
+            raw: {},
+            skeleton: {}
         }
     });
 }
@@ -281,6 +283,24 @@ function augment(Vue) {
         }
     };
 
+    var daterawFilter = function daterawFilter(value, format) {
+        try {
+            return vm.dateFormatter('raw', format)(new Date(value));
+        } catch (e) {
+            warn(e);
+            return value;
+        }
+    };
+
+    var dateskeletonFilter = function dateskeletonFilter(value, format) {
+        try {
+            return vm.dateFormatter('skeleton', format)(new Date(value));
+        } catch (e) {
+            warn(e);
+            return value;
+        }
+    };
+
     var numberFilter = function numberFilter(value, options) {
         try {
             return vm.numberFormatter(options || {})(value);
@@ -340,6 +360,8 @@ function augment(Vue) {
     Vue.filter('date', dateFilter);
     Vue.filter('time', timeFilter);
     Vue.filter('datetime', datetimeFilter);
+    Vue.filter('dateraw', daterawFilter);
+    Vue.filter('dateskeleton', dateskeletonFilter);
     Vue.filter('number', numberFilter);
     Vue.filter('percent', percentFilter);
     Vue.filter('currency', currencyFilter);
@@ -365,6 +387,8 @@ function augment(Vue) {
         date: dateFilter,
         time: timeFilter,
         datetime: datetimeFilter,
+        dateraw: daterawFilter,
+        dateskeleton: dateskeletonFilter,
         number: numberFilter,
         percent: percentFilter,
         currency: currencyFilter,

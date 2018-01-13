@@ -4,6 +4,11 @@
     "dateFormatters": [
         null,
         { "skeleton": "GyMMMd" },
+        { "raw": "GyMMMd" },
+        { "skeleton": "E" },
+        { "raw": "E" },
+        { "skeleton": "EEEE" },
+        { "raw": "EEEE" },
         { "date": "medium" },
         { "time": "medium" },
         { "datetime": "medium" }
